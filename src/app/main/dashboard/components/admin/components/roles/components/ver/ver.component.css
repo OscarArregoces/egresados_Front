@@ -1,0 +1,34 @@
+#elseBlock {
+    margin: auto;
+}
+
+/* button, input{
+    margin-bottom: 10px;
+    width: 70%;
+} */
+h3 {
+    text-align: center;
+    /* margin: auto; */
+}
+
+form {
+    margin: auto;
+}
+
+/* #btnCrear{
+    width: 30%;
+} */
+form input,
+button {
+    width: 100%;
+}
+
+.card input {
+    width: 100%;
+}
+
+.pi-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

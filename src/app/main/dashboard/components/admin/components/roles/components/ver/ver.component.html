@@ -1,0 +1,72 @@
+<div class="grid p-6">
+
+    <div class="col-12 md:col-12 lg:col-12 ">
+        <div class="col-12 md:col-8 lg:col-4">
+            <button id="btnCrear" pButton pRipple type="submit" label="Crear rol" (click)="showDialog()"></button>
+        </div>
+    </div>
+    <div class="col-12 md:col-12 lg:col-6 ">
+        <p-table [value]="roles" [tableStyle]="{'min-width': '20rem'}" *ngIf="roles.length; else elseBlock">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rol>
+                <tr>
+                    <td>{{rol.id}}</td>
+                    <td>{{rol.name}}</td>
+                    <td><p-confirmPopup></p-confirmPopup>
+                        <button  (click)="showEditar(rol.id)" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning mx-3" [disabled]="!banderaBtnEdit"></button>
+                        <button (click)="confirm($event, rol.id )" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger mx-3" [disabled]="!banderaBtnEdit"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <ng-template #elseBlock>
+            <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+        </ng-template>
+
+    </div>
+    <div class="col-12 md:col-12 lg:col-6 ">
+
+        <div *ngIf="displayEditar" class="grid dialog-form-crear col-12 md:col-12 lg:col-12" >
+            <!-- [formGroup]="form"  -->
+            <!-- (submit)="editar()" -->
+            <!-- <form  > -->
+                <div class="card">
+                    <h3 class="my-3">Editar</h3>
+                <!-- formControlName="name" -->
+                <input type="text" pInputText placeholder="Nombre" [(ngModel)]="name" [pKeyFilter]="blockSpecial"
+                    class="my-3">
+                    <!-- type="submit" -->
+                <button (click)="editar()" id="btnCrear" pButton pRipple label="Editar" class="p-button-warning my-2"></button>
+                <button (click)="cancelar()" id="btnCrear" pButton pRipple label="Cancelar" class="p-button my-2"></button>
+                </div>
+            <!-- </form> -->
+        </div>
+
+    </div>
+</div>
+
+<p-toast></p-toast>
+
+
+<p-dialog header="Crear recuerso" [(visible)]="display" [modal]="true" [style]="{width: '40vw', height: '40vh'}"
+    [draggable]="false" [resizable]="false">
+
+    <div class="grid dialog-form-crear col-12 md:col-12 lg:col-12">
+        <form (submit)="submit()" [formGroup]="form">
+            <h3 class="my-3">Crear rol</h3>
+            <input type="text" pInputText placeholder="Nombre" formControlName="name" [pKeyFilter]="blockSpecial"
+                class="my-3">
+            <button id="btnCrear" pButton pRipple type="submit" label="Guardar" class="p-button-success"
+               [disabled]="!form.valid"></button>
+        </form>
+    </div>
+
+
+</p-dialog>
